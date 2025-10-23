@@ -1,0 +1,5 @@
+{
+  "name": "Customs Cost Calculator",
+  "description": "A multi-step form to calculate total import costs into Chile, covering general info, parcel details, CIF price, Chile customs duties and taxes, and unit economics with profit markup.",
+  "requestFramePermissions": []
+}
