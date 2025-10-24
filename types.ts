@@ -43,6 +43,8 @@ export interface CourierQuote {
 
 export interface CIFPrice {
   insuranceRate: number; // % of EXW/FOB
+  manualFreightUsdPerKg?: number; // Optional manual freight rate in USD per kg
+  useManualFreight: boolean; // Whether to use manual freight or courier quote
 }
 
 export interface ServiceItem {

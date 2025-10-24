@@ -134,6 +134,8 @@ export const INITIAL_SCENARIO: Scenario = {
   },
   cifPrice: {
     insuranceRate: DEFAULT_ADMIN_CONFIG.defaultInsuranceRate,
+    manualFreightUsdPerKg: 0,
+    useManualFreight: false,
   },
   chileCustoms: {
     adValoremRate: DEFAULT_ADMIN_CONFIG.adValoremRates[0].rate,

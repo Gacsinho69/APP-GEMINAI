@@ -54,19 +54,24 @@ export const calculationService = {
     );
 
     // --- CIF Price Derived ---
-    const selectedQuote = newCalculations.courierQuotes.find(
-      (q) => q.id === parcelInfo.selectedCourierRateId,
-    );
+    // Check if manual freight should be used
+    if (cifPrice.useManualFreight && cifPrice.manualFreightUsdPerKg) {
+      newCalculations.freightUsd = cifPrice.manualFreightUsdPerKg * newCalculations.chargeableWeightKg;
+    } else {
+      const selectedQuote = newCalculations.courierQuotes.find(
+        (q) => q.id === parcelInfo.selectedCourierRateId,
+      );
 
-    newCalculations.freightUsd = selectedQuote
-      ? calculationService.convertCurrency(
-          selectedQuote.price,
-          selectedQuote.currency,
-          Currency.USD,
-          newCalculations.fxRateToUsd,
-          adminConfig.fxSpreadPercentage,
-        )
-      : 0;
+      newCalculations.freightUsd = selectedQuote
+        ? calculationService.convertCurrency(
+            selectedQuote.price,
+            selectedQuote.currency,
+            Currency.USD,
+            newCalculations.fxRateToUsd,
+            adminConfig.fxSpreadPercentage,
+          )
+        : 0;
+    }
 
     newCalculations.insuranceUsd =
       newCalculations.exwTotalUsd * cifPrice.insuranceRate;

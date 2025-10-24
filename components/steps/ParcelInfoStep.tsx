@@ -165,11 +165,11 @@ const ParcelInfoStep: React.FC<ParcelInfoStepProps> = ({
               <p className="text-lg font-bold text-gray-800">
                 {calculations.chargeableWeightKg.toFixed(2)} kg
                 {calculations.chargeableWeightKg === calculations.volumetricWeightKg && (
-                  <span className="text-xs text-indigo-600 ml-2">(Volumetric)</span>
+                  <span className="text-xs text-blue-600 ml-2">(Volumétrico)</span>
                 )}
                 {calculations.chargeableWeightKg === parcelInfo.actualWeightKg &&
                   parcelInfo.actualWeightKg > 0 && (
-                    <span className="text-xs text-indigo-600 ml-2">(Actual)</span>
+                    <span className="text-xs text-blue-600 ml-2">(Real)</span>
                   )}
               </p>
             </div>
@@ -177,14 +177,14 @@ const ParcelInfoStep: React.FC<ParcelInfoStepProps> = ({
         </div>
       </div>
 
-      <div className="mt-8 p-4 bg-gray-50 rounded-md shadow-sm">
-        <h4 className="text-lg font-semibold text-gray-700 mb-4">Courier Rates</h4>
+      <div className="mt-8 p-4 bg-slate-50 rounded-lg shadow-sm border border-slate-200">
+        <h4 className="text-lg font-semibold text-slate-700 mb-4">Tarifas de Courier</h4>
         <button
           onClick={fetchCourierQuotes}
           disabled={loadingQuotes || calculations.chargeableWeightKg <= 0}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50 transition-colors mb-4"
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md mb-4 font-medium"
         >
-          {loadingQuotes ? <LoadingSpinner /> : 'Fetch Live Courier Rates'}
+          {loadingQuotes ? <LoadingSpinner /> : 'Obtener Tarifas de Courier'}
         </button>
 
         {quotesError && <p className="text-red-500 mb-4">{quotesError}</p>}
@@ -194,19 +194,19 @@ const ParcelInfoStep: React.FC<ParcelInfoStepProps> = ({
             {calculations.courierQuotes.map((quote: CourierQuote) => (
               <div
                 key={quote.id}
-                className={`p-4 border rounded-md shadow-sm transition-all
+                className={`p-4 border rounded-lg shadow-sm transition-all
                   ${parcelInfo.selectedCourierRateId === quote.id
-                    ? 'border-indigo-500 bg-indigo-50 ring-2 ring-indigo-200'
-                    : 'border-gray-200 bg-white hover:bg-gray-50'
+                    ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
+                    : 'border-slate-200 bg-white hover:bg-slate-50'
                   }`}
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="font-semibold text-gray-800 text-lg">
+                    <p className="font-semibold text-slate-800 text-lg">
                       {quote.provider} - {quote.serviceLevel}
                     </p>
-                    <p className="text-sm text-gray-600">
-                      Transit Time: {quote.transitTimeDays} days
+                    <p className="text-sm text-slate-600">
+                      Tiempo de tránsito: {quote.transitTimeDays} días
                     </p>
                   </div>
                   <div className="text-right">
@@ -218,13 +218,13 @@ const ParcelInfoStep: React.FC<ParcelInfoStepProps> = ({
                     />
                     <button
                       onClick={() => handleParcelInfoChange('selectedCourierRateId', quote.id)}
-                      className={`ml-4 px-3 py-1 text-sm rounded-md
+                      className={`ml-4 px-3 py-1 text-sm rounded-md font-medium
                         ${parcelInfo.selectedCourierRateId === quote.id
-                          ? 'bg-green-500 text-white'
-                          : 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'
+                          ? 'bg-emerald-500 text-white'
+                          : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
                         }`}
                     >
-                      {parcelInfo.selectedCourierRateId === quote.id ? 'Selected' : 'Select'}
+                      {parcelInfo.selectedCourierRateId === quote.id ? 'Seleccionado' : 'Seleccionar'}
                     </button>
                   </div>
                 </div>

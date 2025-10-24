@@ -19,7 +19,7 @@ const CIFPriceStep: React.FC<CIFPriceStepProps> = ({
 }) => {
   const { calculateScenario } = useScenario();
 
-  const handleCIFPriceChange = (key: keyof CIFPrice, value: number) => {
+  const handleCIFPriceChange = (key: keyof CIFPrice, value: number | boolean) => {
     updateScenario({
       ...scenario,
       cifPrice: { ...scenario.cifPrice, [key]: value },
@@ -32,9 +32,12 @@ const CIFPriceStep: React.FC<CIFPriceStepProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     scenario.cifPrice.insuranceRate,
+    scenario.cifPrice.useManualFreight,
+    scenario.cifPrice.manualFreightUsdPerKg,
     scenario.parcelInfo.selectedCourierRateId,
     scenario.generalInfo.quantity,
     scenario.generalInfo.exwUnitPriceOrigin,
+    scenario.calculations.chargeableWeightKg,
   ]);
 
   const { cifPrice, calculations, generalInfo } = scenario;
@@ -44,6 +47,34 @@ const CIFPriceStep: React.FC<CIFPriceStepProps> = ({
   return (
     <div>
       <h3 className="text-xl font-semibold mb-4 text-gray-700">CIF Price Calculation</h3>
+
+      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <div className="flex items-center mb-3">
+          <input
+            type="checkbox"
+            id="useManualFreight"
+            checked={cifPrice.useManualFreight}
+            onChange={(e) => handleCIFPriceChange('useManualFreight', e.target.checked)}
+            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          />
+          <label htmlFor="useManualFreight" className="ml-2 text-sm font-medium text-gray-700">
+            Usar precio manual de flete (USD por kg)
+          </label>
+        </div>
+
+        {cifPrice.useManualFreight && (
+          <CurrencyInput
+            id="manualFreightUsdPerKg"
+            label="Precio de Flete (USD/kg)"
+            value={cifPrice.manualFreightUsdPerKg || 0}
+            onChange={(val) => handleCIFPriceChange('manualFreightUsdPerKg', val)}
+            currencySymbol="$"
+            min={0}
+            precision={2}
+          />
+        )}
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <CurrencyInput
           id="freightUsd"
@@ -53,7 +84,7 @@ const CIFPriceStep: React.FC<CIFPriceStepProps> = ({
           currencySymbol="USD"
           min={0}
           precision={2}
-          disabled // Derived from courier rates
+          disabled // Derived from courier rates or manual input
         />
         <CurrencyInput
           id="insuranceRate"

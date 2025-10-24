@@ -9,15 +9,15 @@ const App: React.FC = () => {
 
   return (
     <AppProvider>
-      <div className="min-h-screen bg-gray-100 p-4">
-        <div className="container mx-auto max-w-4xl bg-white shadow-lg rounded-lg p-6">
-          <header className="mb-6 flex justify-between items-center">
-            <h1 className="text-3xl font-bold text-gray-800">Customs Cost Calculator</h1>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+        <div className="container mx-auto max-w-5xl bg-white shadow-xl rounded-xl p-8 border border-slate-200">
+          <header className="mb-8 flex justify-between items-center border-b border-slate-200 pb-6">
+            <h1 className="text-4xl font-bold text-slate-800">Calculadora de Costos Aduaneros</h1>
             <button
               onClick={() => setIsAdminMode(!isAdminMode)}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+              className="px-6 py-3 bg-slate-700 text-white rounded-lg hover:bg-slate-800 transition-all shadow-md hover:shadow-lg font-medium"
             >
-              {isAdminMode ? 'Exit Admin Mode' : 'Admin Settings'}
+              {isAdminMode ? 'Salir Admin' : 'Configuración'}
             </button>
           </header>
 

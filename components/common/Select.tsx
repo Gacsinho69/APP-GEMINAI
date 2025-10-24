@@ -23,14 +23,15 @@ const Select: React.FC<SelectProps> = ({
   return (
     <div className={`mb-4 ${containerClassName}`}>
       {label && (
-        <label htmlFor={id} className={`block text-sm font-medium text-gray-700 ${labelClassName}`}>
+        <label htmlFor={id} className={`block text-sm font-medium text-slate-700 mb-1 ${labelClassName}`}>
           {label}
         </label>
       )}
       <select
         id={id}
-        className={`mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          ${error ? 'border-red-500' : 'border-gray-300'} ${className}`}
+        className={`mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors
+          ${error ? 'border-red-500' : 'border-slate-300'} ${className}
+          disabled:bg-slate-100 disabled:text-slate-500 disabled:cursor-not-allowed`}
         {...props}
       >
         {options.map((option) => (

@@ -98,34 +98,34 @@ const Wizard: React.FC = () => {
   const CurrentStepComponent = steps[currentStep].component;
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-6 border-b pb-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Step {currentStep + 1}: {steps[currentStep].name}</h2>
+    <div className="p-2">
+      <div className="flex justify-between items-center mb-6 border-b border-slate-200 pb-4">
+        <h2 className="text-2xl font-semibold text-slate-700">Paso {currentStep + 1}: {steps[currentStep].name}</h2>
         <div className="flex space-x-2">
           <input
             type="text"
-            placeholder="Scenario Name"
-            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Nombre del Escenario"
+            className="p-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             value={scenarioName}
             onChange={(e) => setScenarioName(e.target.value)}
           />
           <button
             onClick={handleSaveScenario}
-            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-all shadow-sm hover:shadow-md font-medium"
           >
-            Save Scenario
+            Guardar
           </button>
           <button
             onClick={handleNewScenario}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-sm hover:shadow-md font-medium"
           >
-            New Scenario
+            Nuevo
           </button>
           <button
             onClick={handleExportScenario}
-            className="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors"
+            className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-all shadow-sm hover:shadow-md font-medium"
           >
-            Export (Text)
+            Exportar
           </button>
         </div>
       </div>
@@ -135,10 +135,10 @@ const Wizard: React.FC = () => {
           <button
             key={step.name}
             onClick={() => setCurrentStep(index)}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors
+            className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap
               ${index === currentStep
-                ? 'bg-indigo-600 text-white shadow-md'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
               }`}
           >
             {step.name}
@@ -146,7 +146,7 @@ const Wizard: React.FC = () => {
         ))}
       </div>
 
-      <div className="border border-gray-200 p-6 rounded-lg shadow-sm bg-white">
+      <div className="border border-slate-200 p-6 rounded-xl shadow-sm bg-white">
         <CurrentStepComponent scenario={scenario} updateScenario={updateScenario} />
       </div>
 
@@ -154,46 +154,46 @@ const Wizard: React.FC = () => {
         <button
           onClick={handleBack}
           disabled={currentStep === 0}
-          className="px-6 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 disabled:opacity-50 transition-colors"
+          className="px-6 py-2.5 bg-slate-200 text-slate-800 rounded-lg hover:bg-slate-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
         >
-          Back
+          Anterior
         </button>
         <button
           onClick={handleNext}
           disabled={currentStep === steps.length - 1}
-          className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50 transition-colors"
+          className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium shadow-sm hover:shadow-md"
         >
-          Next
+          Siguiente
         </button>
       </div>
 
       <div className="mt-8">
-        <h3 className="text-xl font-semibold text-gray-700 mb-4">Saved Scenarios</h3>
+        <h3 className="text-xl font-semibold text-slate-700 mb-4">Escenarios Guardados</h3>
         {savedScenarios.length === 0 ? (
-          <p className="text-gray-500">No scenarios saved yet.</p>
+          <p className="text-slate-500">No hay escenarios guardados aún.</p>
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {savedScenarios.map((s) => (
               <li
                 key={s.id}
-                className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm"
+                className="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-lg shadow-sm hover:shadow-md transition-shadow"
               >
                 <div>
-                  <span className="font-medium text-gray-800">{s.name}</span>
-                  <p className="text-sm text-gray-500">{new Date(s.date).toLocaleString()}</p>
+                  <span className="font-medium text-slate-800">{s.name}</span>
+                  <p className="text-sm text-slate-500">{new Date(s.date).toLocaleString()}</p>
                 </div>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => handleLoadScenario(s.id)}
-                    className="px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-md hover:bg-blue-200 transition-colors"
+                    className="px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-md hover:bg-blue-200 transition-colors font-medium"
                   >
-                    Load
+                    Cargar
                   </button>
                   <button
                     onClick={() => handleDeleteScenario(s.id, s.name)}
-                    className="px-3 py-1 text-sm bg-red-100 text-red-800 rounded-md hover:bg-red-200 transition-colors"
+                    className="px-3 py-1 text-sm bg-red-100 text-red-800 rounded-md hover:bg-red-200 transition-colors font-medium"
                   >
-                    Delete
+                    Borrar
                   </button>
                 </div>
               </li>
