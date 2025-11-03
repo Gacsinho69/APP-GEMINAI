@@ -109,7 +109,6 @@ function setupShipmentTracker() {
       .setRanges([sh.getRange(2, 8, lastRow - 1, 1)]) // ETA column
       .whenFormulaSatisfied('=AND($H2<TODAY()-3,$K2<>"Delivered",$H2<>"")')
       .setFontColor("#A50E0E")
-      .setBold(true)
       .build()
   );
 
@@ -129,8 +128,10 @@ function setupShipmentTracker() {
   if (!dash) dash = ss.insertSheet(dashName);
   dash.clear();
 
-  dash.getRange("A1").setValue("Shipments Dashboard");
-  dash.getRange("A1").setFontSize(16).setBold(true);
+  const titleCell = dash.getRange("A1");
+  titleCell.setValue("Shipments Dashboard");
+  titleCell.setFontSize(16);
+  titleCell.setFontWeight("bold");
 
   dash.getRange("A3").setValue("Total Shipments");
   dash.getRange("B3").setFormula('=COUNTA(Shipments!A2:A)');
